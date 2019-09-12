@@ -1,0 +1,21 @@
+@font-face {
+  font-family: "Fedra Sans Std";
+  src: url("hinted-FedraSansStd-Medium.eot");
+  src: local("FedraSansStd-Medium"),
+    url("hinted-FedraSansStd-Medium.eot?#iefix") format("embedded-opentype"),
+    url("hinted-FedraSansStd-Medium.woff") format("woff"),
+    url("hinted-FedraSansStd-Medium.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Fedra Sans Std Book";
+  src: url("hinted-FedraSansStd-Book.eot");
+  src: local("FedraSansStd-Book"),
+    url("hinted-FedraSansStd-Book.eot?#iefix") format("embedded-opentype"),
+    url("hinted-FedraSansStd-Book.woff") format("woff"),
+    url("hinted-FedraSansStd-Book.ttf") format("truetype");
+  font-weight: 500;
+  font-style: normal;
+}

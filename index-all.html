@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>Organigrama Secretaría</title>
+    <link href="images/favicon.ico" rel="icon" type="image/x-icon" />
+    <link rel="stylesheet" href="fonts/fedra/stylesheet.css" media="all" />
+    <style>
+      .org-chart-person-email a {
+        color: #fff !important;
+      }
+      #org-chart-container {
+        position: relative;
+        height: 760px;
+        width: 723px;
+        margin: 0 auto;
+        background: #fff url("images/org-chart-container-bg.gif") 0 0 no-repeat;
+      }
+
+      #org-chart-container.debug {
+        background-image: url("images/org-chart-container-marks-bg.gif");
+      }
+
+      .base {
+        position: absolute;
+        width: 185px;
+        height: 77px;
+        padding: 8px;
+        background: transparent url("images/org-chart-blocks-bg.png") 0 0
+          no-repeat;
+        color: #555658;
+        font-family: "Fedra Sans Std", Arial, Helvetica, sans-serif;
+        font-size: 25px !important;
+        font-weight: 500;
+        font-variant: small-caps;
+        text-transform: uppercase;
+        text-align: center;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      .base p {
+        font-size: 25px !important;
+        line-height: 1.5;
+      }
+
+      .base.unidad {
+        width: 155px;
+        height: 63px;
+        background-position: -201px 0;
+      }
+      .base.unidad p {
+        font-size: 12px !important;
+        line-height: 1.5;
+      }
+      .base.direccion {
+        width: 130px;
+        height: 51px;
+        font-size: 12px !important;
+        background-position: -372px 0;
+      }
+      .base.direccion p {
+        font-size: 10px !important;
+        line-height: 1.5;
+      }
+      .base.direccion.unidad {
+        width: 108px;
+        height: 59px;
+        font-size: 10px !important;
+        background-position: -925px 0;
+      }
+      .base.direccion.unidad p {
+        font-size: 9px !important;
+        line-height: 1.5;
+      }
+      .base.direccion.coordinacion {
+        width: 99px;
+        height: 41px;
+        font-size: 9px !important;
+        background-position: -642px 0;
+      }
+      .base.direccion.coordinacion p {
+        font-size: 8px !important;
+        line-height: 1.5;
+      }
+
+      .base:hover p {
+        color: #ffc627;
+      }
+      .base:hover,
+      .base.unidad:hover {
+        color: #ffc627;
+      }
+      .base:active,
+      .base.active,
+      .base.unidad:active,
+      .base.unidad.active,
+      .base.direccion:active,
+      .base.direccion.active,
+      .base.direccion.unidad:active,
+      .base.direccion.unidad.active,
+      .base.direccion.coordinacion:active,
+      .base.direccion.coordinacion.active {
+        color: #007833;
+      }
+
+      .base.active {
+        background-position: 0 -93px;
+      }
+      .base.unidad.active {
+        background-position: -201px -79px;
+      }
+      .base.direccion.active {
+        background-position: -372px -67px;
+      }
+      .base.direccion.unidad.active {
+        background-position: -925px -75px;
+      }
+      .base.direccion.coordinacion.active {
+        background-position: -642px -57px;
+      }
+
+      .base p.title {
+        position: relative;
+        -webkit-transform: translateY(-50%);
+        -ms-transform: translateY(-50%);
+        transform: translateY(-50%);
+        top: 50%;
+        margin: 8px 0 0 0;
+      }
+
+      .base.direccion p.title {
+        margin-top: 5px;
+      }
+
+      .base.direccion.unidad p.title {
+        margin-top: 4px;
+      }
+
+      .base.direccion.coordinacion p.title {
+        margin-top: 3px;
+      }
+
+      .org-chart-info,
+      .ucab-green .org-chart-info {
+        position: absolute;
+        display: none;
+        top: 0;
+        left: 0;
+        width: 140px;
+        height: 62px;
+        padding: 8px 16px;
+        font-family: "Fedra Sans Std Book", Arial, Helvetica, sans-serif;
+        font-size: 13px !important;
+        font-weight: 500;
+        font-variant: small-caps;
+        text-align: center;
+        border-radius: 18px;
+        box-shadow: 0 1px 16px 20px rgba(255, 255, 255, 0.45);
+        background: #047832;
+        background-color: #047832;
+        border: 2px solid #fff;
+        z-index: 100;
+      }
+
+      .ucab-blue .org-chart-info {
+        background-color: #3cb5e5;
+      }
+
+      .ucab-yellow .org-chart-info {
+        background-color: #fec628;
+      }
+
+      .org-chart-info.with-padding {
+        padding: 8px 16px 8px 28px;
+      }
+
+      .org-chart-info div {
+        display: table-cell;
+        vertical-align: middle;
+      }
+
+      .org-chart-info span {
+        display: block;
+      }
+
+      .org-chart-info span.org-chart-person-name {
+        font-family: "Fedra Sans Std Book", Arial, Helvetica, sans-serif;
+        font-size: 15px !important;
+        font-weight: 400;
+        text-transform: lowercase;
+        line-height: 1.2;
+        color: #fff;
+      }
+      .org-chart-info span.org-chart-person-email a {
+        font-family: "Fedra Sans Std Book", Arial, Helvetica, sans-serif;
+        font-variant: normal;
+        font-size: 11px !important;
+        font-weight: 300;
+        color: #fff;
+      }
+      .org-chart-info span.org-chart-person-phone {
+        font-size: 12px !important;
+        color: #fff;
+      }
+
+      .ucab-yellow .org-chart-info span.org-chart-person-name,
+      .ucab-yellow .org-chart-info span.org-chart-person-email a,
+      .ucab-yellow .org-chart-info span.org-chart-person-phone {
+        color: #000;
+      }
+
+      .org-chart-info:before {
+        position: absolute;
+        top: -60px;
+        left: -20px;
+        content: url("images/arrow-curve.png");
+      }
+
+      .org-chart-info.bottom-right:before {
+        top: -10px;
+        right: 0;
+        left: -254px;
+
+        -moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH";
+      }
+
+      .org-chart-info.bottom-left:before {
+        top: -10px;
+        left: 0;
+        right: -254px;
+      }
+
+      .org-chart-info.top-right:before {
+        top: 24px;
+        left: -248px;
+        right: 0;
+
+        -moz-transform: scale(-1, -1);
+        -o-transform: scale(-1, -1);
+        -webkit-transform: scale(-1, -1);
+        transform: scale(-1, -1);
+        filter: FlipH FlipV;
+        -ms-filter: "FlipH FlipV";
+      }
+
+      .org-chart-info.top-left:before {
+        top: 24px;
+        left: 0;
+        right: -248px;
+
+        -moz-transform: scaleY(-1);
+        -o-transform: scaleY(-1);
+        -webkit-transform: scaleY(-1);
+        transform: scaleY(-1);
+        filter: FlipV;
+        -ms-filter: "FlipV";
+      }
+
+      #org-chart-secretaria {
+        top: 0;
+        left: 278px;
+      }
+      #org-chart-unid-esta-inst {
+        top: 111px;
+        left: 443px;
+      }
+      #org-chart-unid-iden-inst {
+        top: 160px;
+        left: 143px;
+      }
+      #org-chart-cent-cont-ucab {
+        top: 208px;
+        left: 443px;
+      }
+      #org-chart-unid-admi-doce {
+        top: 259px;
+        left: 143px;
+      }
+      #org-chart-comi-disc {
+        top: 306px;
+        left: 443px;
+      }
+      #org-chart-dire-gest-estu {
+        top: 419px;
+        left: 0;
+      }
+      #org-chart-dire-admi-acad {
+        top: 419px;
+        left: 204px;
+      }
+      #org-chart-dire-arch-gene {
+        top: 419px;
+        left: 409px;
+      }
+      #org-chart-direc-secre-guay {
+        top: 419px;
+        left: 614px;
+      }
+      #org-chart-unid-aten-publ {
+        top: 507px;
+        left: 85px;
+      }
+      #org-chart-unid-sopo-siste-admi-acad {
+        top: 507px;
+        left: 289px;
+      }
+      #org-chart-unid-sopo-sist-gest-docu {
+        top: 507px;
+        left: 494px;
+      }
+      #org-chart-coor-ingr {
+        top: 666px;
+        left: 0;
+      }
+      #org-chart-coor-regi-cont {
+        top: 666px;
+        left: 129px;
+      }
+      #org-chart-coor-egre {
+        top: 666px;
+        left: 258px;
+      }
+      #org-chart-coor-prog-gest-aula {
+        top: 666px;
+        left: 387px;
+      }
+      #org-chart-coor-catal-capp {
+        top: 666px;
+        left: 516px;
+      }
+      #org-chart-coor-gest-docu {
+        top: 666px;
+        left: 645px;
+      }
+
+      #org-chart-unid-sopo-siste-admi-acad p.title {
+        margin-top: 5px;
+      }
+      #org-chart-unid-sopo-sist-gest-docu p.title {
+        margin-top: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="org-chart-container">
+      <div
+        id="org-chart-secretaria"
+        class="base"
+        data-info-position="bottom-right"
+      >
+        <p class="title">Secretaría</p>
+      </div>
+      <div
+        id="org-chart-unid-esta-inst"
+        class="base unidad"
+        data-path="secretaria"
+        data-info-position="bottom-left"
+      >
+        <p class="title">Unidad de Estadísticas Institucionales</p>
+      </div>
+      <div
+        id="org-chart-unid-iden-inst"
+        class="base unidad"
+        data-path="secretaria"
+        data-info-position="bottom-right"
+      >
+        <p class="title">Unidad de Identificación Institucional</p>
+      </div>
+      <div
+        id="org-chart-cent-cont-ucab"
+        class="base unidad"
+        data-path="secretaria"
+        data-info-position="bottom-left"
+      >
+        <p class="title">Centro de Contacto UCAB</p>
+      </div>
+      <div
+        id="org-chart-unid-admi-doce"
+        class="base unidad"
+        data-path="secretaria"
+        data-info-position="bottom-right"
+      >
+        <p class="title">Unidad de Administración Docente</p>
+      </div>
+      <div
+        id="org-chart-comi-disc"
+        class="base unidad"
+        data-path="secretaria"
+        data-info-position="bottom-left"
+      >
+        <p class="title">Comisión Disciplinaria</p>
+      </div>
+      <div
+        id="org-chart-dire-gest-estu"
+        class="base direccion"
+        data-path="secretaria"
+        data-info-position="bottom-right"
+      >
+        <p class="title">Dirección de Gestión Estudiantil</p>
+      </div>
+      <div
+        id="org-chart-dire-admi-acad"
+        class="base direccion"
+        data-path="secretaria"
+        data-info-position="bottom-right"
+      >
+        <p class="title">Dirección de Administración Académica</p>
+      </div>
+      <div
+        id="org-chart-dire-arch-gene"
+        class="base direccion"
+        data-path="secretaria"
+        data-info-position="bottom-left"
+      >
+        <p class="title">Dirección de Archivo General</p>
+      </div>
+      <div
+        id="org-chart-direc-secre-guay"
+        class="base direccion"
+        data-path="secretaria"
+        data-info-position="bottom-left"
+      >
+        <p class="title">Dirección de Secretaría Guayana</p>
+      </div>
+      <div
+        id="org-chart-unid-aten-publ"
+        class="base direccion unidad"
+        data-path="secretaria dire-gest-estu"
+        data-info-position="top-right"
+      >
+        <p class="title">Unidad de Atención al Público</p>
+      </div>
+      <div
+        id="org-chart-unid-sopo-siste-admi-acad"
+        class="base direccion unidad"
+        data-path="secretaria dire-admi-acad"
+        data-info-position="top-right"
+      >
+        <p class="title">
+          Unidad de Soporte al Sistema de Administración Académica
+        </p>
+      </div>
+      <div
+        id="org-chart-unid-sopo-sist-gest-docu"
+        class="base direccion unidad"
+        data-path="secretaria dire-arch-gene"
+        data-info-position="top-right"
+      >
+        <p class="title">Unidad de Soporte al Sistema de Gestión Documental</p>
+      </div>
+      <div
+        id="org-chart-coor-ingr"
+        class="base direccion coordinacion"
+        data-path="secretaria dire-gest-estu"
+        data-info-position="top-right"
+      >
+        <p class="title">Coordinación de Ingreso</p>
+      </div>
+      <div
+        id="org-chart-coor-regi-cont"
+        class="base direccion coordinacion"
+        data-path="secretaria dire-gest-estu"
+        data-info-position="top-right"
+      >
+        <p class="title">Coordinación de Registro y Control</p>
+      </div>
+      <div
+        id="org-chart-coor-egre"
+        class="base direccion coordinacion"
+        data-path="secretaria dire-gest-estu"
+        data-info-position="top-right"
+      >
+        <p class="title">Coordinación de Egreso</p>
+      </div>
+      <div
+        id="org-chart-coor-prog-gest-aula"
+        class="base direccion coordinacion"
+        data-path="secretaria dire-admi-acad"
+        data-info-position="top-left"
+      >
+        <p class="title">Coordinación de Prog. y Gestión de Aulas</p>
+      </div>
+      <div
+        id="org-chart-coor-catal-capp"
+        class="base direccion coordinacion"
+        data-path="secretaria dire-admi-acad"
+        data-info-position="top-left"
+      >
+        <p class="title">Coordinación de Catálogo y CAPP</p>
+      </div>
+      <div
+        id="org-chart-coor-gest-docu"
+        class="base direccion coordinacion"
+        data-path="secretaria dire-arch-gene"
+        data-info-position="top-left"
+      >
+        <p class="title">Coordinación de Gestión Documental</p>
+      </div>
+      <div class="org-chart-info"></div>
+    </div>
+
+    <div
+      id="background-color-select"
+      style="margin:20px 0 0 0;width:100%;text-align:center;font-family:'Fedra Sans Std Book',sans-serif;"
+    >
+      Información en: <a href="#" rel="ucab-yellow">amarillo</a> |
+      <a href="#" rel="ucab-blue">azul</a> |
+      <a href="#" rel="ucab-green">verde</a>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+      var persons = {
+        secretaria: ["Magaly Vásquez González"],
+        "unid-esta-inst": [
+          "Zany Sandoval",
+          "zsandova-at-ucab.edu.ve",
+          "407.4333"
+        ],
+        "unid-iden-inst": [
+          "Pegy Rodríguez",
+          "ppedriqu-at-ucab.edu.ve",
+          "407.6121"
+        ],
+        "cent-cont-ucab": [
+          "Nacary Flores",
+          "nfloresl-at-ucab.edu.ve",
+          "407.6129"
+        ],
+        "unid-admi-doce": [
+          "Ismaru Lara Duque",
+          "ilaraduq-at-ucab.edu.ve",
+          " 407.4295"
+        ],
+        "comi-disc": [
+          "Lisbeth Da Costa",
+          "ldacosta-at-ucab.edu.ve",
+          "407.4295"
+        ],
+        "dire-gest-estu": ["Karyn Ramos", "kramos-at-ucab.edu.ve", "407.4581"],
+        "unid-aten-publ": [
+          "Pegy Rodríguez",
+          "ppedriqu-at-ucab.edu.ve",
+          "407.6121"
+        ],
+        "coor-ingr": ["Minka Hernández", "minherna-at-ucab.edu.ve", "407.4278"],
+        "coor-egre": [
+          "Eilyn Colmenares",
+          "eicolmen-at-ucab.edu.ve",
+          "407.4429"
+        ],
+        "dire-admi-acad": [
+          "María Gabriela Da Costa",
+          "mdacosta-at-ucab.edu.ve",
+          "407.4418"
+        ],
+        "unid-sopo-siste-admi-acad": [
+          "Betzabeth Castillo",
+          "bcastill-at-ucab.edu.ve",
+          "407.4589"
+        ],
+        "coor-prog-gest-aula": [
+          "Betzabeth Castillo",
+          "bcastill-at-ucab.edu.ve",
+          "407.4589"
+        ],
+        "coor-catal-capp": [
+          "Mario Miranda",
+          "mmiranda-at-ucab.edu.ve",
+          "407.6120"
+        ],
+        "dire-arch-gene": [
+          "Starlys Manrique",
+          "smanriqu-at-ucab.edu.ve",
+          "407.6046"
+        ],
+        "unid-sopo-sist-gest-docu": [
+          "Beatriz Leyzeaga",
+          "bleyzeag-at-ucab.edu.ve",
+          "407.6088"
+        ],
+        "coor-gest-docu": [
+          "Carla Hernández",
+          "chernande-at-ucab.edu.ve",
+          "407.4482"
+        ],
+        "direc-secre-guay": [
+          "Oliver Giusti",
+          "ogiustic-at-ucab.edu.ve",
+          "(0286) 600.0236"
+        ]
+      };
+    </script>
+    <script>
+      jQuery(function() {
+        var infoTT = jQuery(".org-chart-info");
+        var isActive = false;
+        var lastPositionClass;
+        var lastKey;
+
+        jQuery(".base").on("click", function(evt) {
+          infoTT.fadeOut(150, function() {
+            infoTT.attr("class", "org-chart-info");
+
+            var target = jQuery(evt.currentTarget);
+            var path = target.data("path")
+              ? target.data("path").split(" ")
+              : [];
+            var ttPos = target.data("info-pos")
+              ? target.data("info-pos")
+              : "top left";
+
+            jQuery(".base").removeClass("active");
+            target.addClass("active");
+
+            for (var i = 0; i < path.length; i++) {
+              jQuery("#org-chart-" + path[i]).addClass("active");
+            }
+
+            var pos = getPosition(target);
+            var info = "";
+            var key = target.attr("id").replace("org-chart-", "");
+
+            if (
+              key &&
+              persons &&
+              persons[key] &&
+              persons[key].length &&
+              persons[key].length > 0
+            ) {
+              info =
+                '<div><span class="org-chart-person-name">' +
+                persons[key][0] +
+                "</span>";
+
+              if (persons[key][1]) {
+                var email = persons[key][1].replace("-at-", "@");
+                info +=
+                  '<span class="org-chart-person-email"><a href="mailto:' +
+                  email +
+                  '" target="_blank">' +
+                  email +
+                  "</a></span>";
+              }
+
+              if (persons[key][2]) {
+                info +=
+                  '<span class="org-chart-person-phone">' +
+                  persons[key][2] +
+                  "</span>";
+              }
+
+              info += "</div>";
+            }
+
+            if (info && info !== "") {
+              if (lastKey !== key) {
+                if (lastKey) {
+                  hideInfo(lastPositionClass);
+                }
+                lastKey = key;
+                showInfo(pos, info, target.data("info-position"));
+              } else {
+                hideInfo(lastPositionClass);
+                lastKey = undefined;
+              }
+            }
+          });
+        });
+
+        var showInfo = function(pos, info, cssClass) {
+          jQuery(".org-chart-info")
+            .addClass(cssClass)
+            .css(pos)
+            .html(info)
+            .animate(
+              {
+                opacity: "toggle"
+              },
+              {
+                duration: 200,
+                start: function() {
+                  jQuery(this).css("display", "table");
+                }
+              }
+            );
+        };
+
+        var hideInfo = function(cssClass) {
+          jQuery(".org-chart-info")
+            .removeClass(cssClass)
+            .html("")
+            .fadeOut();
+        };
+
+        var getPosition = function(elem) {
+          if (elem) {
+            var elemPos = elem.position();
+            var pos = elem.data("info-position");
+            var newPos = { left: 0, top: 0 };
+            var offsetX = 20;
+            var offsetY = 20;
+
+            if (pos && pos !== null && pos !== "") {
+              pos = pos.split("-");
+
+              for (var i = 0; i < pos.length; i++) {
+                switch (pos[i]) {
+                  case "top":
+                    newPos["top"] = elemPos.top - 78 - offsetY;
+                    break;
+                  case "center":
+                    newPos["top"] = elemPos.top + elem.outerHeight() / 2 - 39; // 78h info
+                    newPos["left"] = elemPos.left + offsetX;
+                    break;
+                  case "bottom":
+                    newPos["top"] = elemPos.top + elem.outerHeight() + offsetY;
+                    break;
+                  case "left":
+                    newPos["left"] = elemPos.left - 168 - offsetX;
+                    newPos["background-position"] = "-757px 0";
+                    break;
+                  case "right":
+                    newPos["left"] = elemPos.left + elem.outerWidth() + offsetX;
+                    newPos["background-position"] = "-758px -78px";
+                    break;
+                }
+              }
+            }
+
+            return newPos;
+          }
+        };
+
+        jQuery("#background-color-select").on("click", "a", function(evt) {
+          evt.preventDefault();
+
+          jQuery("body").attr("class", jQuery(evt.target).attr("rel"));
+        });
+      });
+    </script>
+  </body>
+</html>
