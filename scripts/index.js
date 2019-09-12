@@ -12,6 +12,7 @@ var persons = {
   "dire-gest-estu": ["Karyn Ramos", "kramos-at-ucab.edu.ve", "407.4581"],
   "unid-aten-publ": ["Pegy Rodríguez", "ppedriqu-at-ucab.edu.ve", "407.6121"],
   "coor-ingr": ["Minka Hernández", "minherna-at-ucab.edu.ve", "407.4278"],
+  "coor-regi-cont": [],
   "coor-egre": ["Eilyn Colmenares", "eicolmen-at-ucab.edu.ve", "407.4429"],
   "dire-admi-acad": [
     "María Gabriela Da Costa",
