@@ -2,14 +2,14 @@ var persons = {
   secretaria: ["Magaly Vásquez González"],
   "unid-esta-inst": ["Zany Sandoval", "zsandova-at-ucab.edu.ve", "407.4333"],
   "unid-iden-inst": ["Pegy Rodríguez", "ppedriqu-at-ucab.edu.ve", "407.6121"],
-  "cent-cont-ucab": ["Nacary Flores", "nfloresl-at-ucab.edu.ve", "407.6129"],
+  "cent-cont-ucab": ["Nacary Flores", "nfloresl-at-ucab.edu.ve", "407.6082"],
   "unid-admi-doce": [
     "Ismaru Lara Duque",
     "ilaraduq-at-ucab.edu.ve",
     " 407.4295"
   ],
   "comi-disc": ["Lisbeth Da Costa", "ldacosta-at-ucab.edu.ve", "407.4295"],
-  "dire-gest-estu": ["Karyn Ramos", "kramos-at-ucab.edu.ve", "407.4581"],
+  "dire-gest-estu": ["Eilyn Colmenares", "kramos-at-ucab.edu.ve", "407.4581"],
   "unid-aten-publ": ["Pegy Rodríguez", "ppedriqu-at-ucab.edu.ve", "407.6121"],
   "coor-ingr": ["Minka Hernández", "minherna-at-ucab.edu.ve", "407.4278"],
   "coor-regi-cont": [],
@@ -17,17 +17,17 @@ var persons = {
   "dire-admi-acad": [
     "María Gabriela Da Costa",
     "mdacosta-at-ucab.edu.ve",
-    "407.4418"
+    "407.6065"
   ],
   "unid-sopo-siste-admi-acad": [
-    "Betzabeth Castillo",
+    "Alejandro Yaber Llanos",
     "bcastill-at-ucab.edu.ve",
-    "407.4589"
+    "407.6064"
   ],
   "coor-prog-gest-aula": [
-    "Betzabeth Castillo",
+    "Haydee Lugo",
     "bcastill-at-ucab.edu.ve",
-    "407.4589"
+    "407.6083"
   ],
   "coor-catal-capp": ["Mario Miranda", "mmiranda-at-ucab.edu.ve", "407.6120"],
   "dire-arch-gene": ["Starlys Manrique", "smanriqu-at-ucab.edu.ve", "407.6046"],
